@@ -25,6 +25,10 @@ namespace ScheduleApi.models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
+        
+        [Required]
+        [StringLength(40, ErrorMessage = "Maximum charaacters exceeded ")]
+        public string WorkStationType { get; set; }
 
         [Required]
         public string Comment { get; set; }

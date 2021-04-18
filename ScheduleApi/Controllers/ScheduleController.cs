@@ -33,6 +33,7 @@ namespace ScheduleApi.Controllers
                 ScheduleId = x.ScheduleId,
                 FirstName = x.FirstName,
                 LastName = x.LastName,
+                WorkStationType=x.WorkStationType,
                 Date = x.Date,
                 Comment = x.Comment,
                 ImageName = x.ImageName,
@@ -66,7 +67,7 @@ namespace ScheduleApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (!string.IsNullOrWhiteSpace( schedule.ImageName))
+            if (schedule.ImageFile !=null)
             {
                 schedule.ImageName = await SaveImage(schedule.ImageFile);
             }
@@ -78,7 +79,7 @@ namespace ScheduleApi.Controllers
             }
 
 
-            return CreatedAtAction(nameof(schedule), new { id = schedule.ScheduleId }, schedule);
+            return StatusCode(201);
         }
 
         [HttpPut("{id}")]
